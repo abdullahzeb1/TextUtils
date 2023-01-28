@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <html>
+      <head>
+        <title>Fake download via datauri</title>
+      </head>
+
+      <body>
+        <!-- <div class="test"> -->
+        <textarea cols="50" rows="10" id="source"> </textarea>
+        <br />
+        <button type="button" id="save" title="Save as text file">Save</button>
+
+        <!-- <button
+            className="btn btn-primary mx-1 my-3"
+            onClick="handlesave(
+              source,
+              'fileName.txt',
+              'data: text/json;charset=utf-8,'
+            )"
+          >
+            Click to Save
+          </button>
+        </div> -->
+
+        <script type="text/javascript">
+          // const handlesave = (function () {
+          //   console.log('hello');
+          //   const newText = document.createElement('a');
+          //   document.body.appendChild(newText);
+          //   return function (data, fileName, text) {
+          //     newText.href = text + data;
+          //     newText.download = fileName;
+          //     newText.click();
+          //   };
+          // })();
+          //   const handlesave = () => {
+          //     const link = document.createElement("a");
+          //     const content = document.querySelector("textarea").value;
+          //     const file = new Blob([content], { type: 'text/plain' });
+          //     link.href = URL.createObjectURL(file);
+          //     link.download = "sample.txt";
+          //     link.click();
+          //     URL.revokeObjectURL(link.href);
+          //  };
+
+          {
+            /* <button
+            className='btn btn-primary mx-1 my-3'
+            onClick={handlesave()}
+          >
+            Click to Save
+          </button> */
+          }
+
+          // document.getElementById('save').onclick = function () {
+          //   var content = document.getElementById('my-box').value;
+          //   window.open('data:application/txt,' + encodeURIComponent(content), '_self');
+          // };
+
+          {
+            /* <button
+            className='btn btn-primary mx-1 my-3'
+            type='button'
+            id='save'
+            title='Save as text file'
+          >
+            Save
+          </button> */
+          }
+
+          // when document is ready
+          document.getElementById('save').onclick = function () {
+            // when clicked the button
+            var content = document.getElementById('source').value;
+            // a [save as] dialog will be shown
+            window.open(
+              'data:application/txt,' + encodeURIComponent(content),
+              '_self'
+            );
+          };
+        </script>
+      </body>
+    </html>
+  </body>
+</html>
