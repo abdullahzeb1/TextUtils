@@ -37,16 +37,16 @@ export default function TextForm(props) {
   };
 
   const handlecopy = () => {
-    let newText = document.getElementById('my-box');
-    newText.select();
-    navigator.clipboard.writeText(newText.value);
+    // let newText = document.getElementById('my-box');
+    // newText.select();          (newText.value);
+    navigator.clipboard.writeText(text);
     props.showAlert(' Copied to Clipboard', 'Success');
   };
 
   const handleExteaSpaces = () => {
     let newText = text.split(/[ ]+/);
-    props.showAlert(' Extea Spaces Removed', 'Success');
     setText(newText.join(' '));
+    props.showAlert(' Extea Spaces Removed', 'Success');
   };
   return (
     <>
@@ -56,43 +56,54 @@ export default function TextForm(props) {
           color: props.mode === 'dark' ? 'white' : 'black',
         }}
       >
-        <h1>{props.heading}</h1>
-        <div className='mt-3'>
+        <h1 className='mb-4'>{props.heading}</h1>
+        <div className='mb-3'>
           <textarea
             className='form-control'
             value={text}
             onChange={handleOnChange}
             style={{
-              backgroundColor: props.mode === 'dark' ? '#104066' : 'white',
+              backgroundColor: props.mode === 'dark' ? '#13466e' : 'white',
               color: props.mode === 'dark' ? 'white' : 'black',
             }}
             id='my-box'
             rows='10'
           ></textarea>
 
-          <button className='btn btn-primary mx-1 my-3' onClick={handleUpClick}>
+          <button
+            disabled={text.length === 0}
+            className='btn btn-primary mx-1 my-1'
+            onClick={handleUpClick}
+          >
             Convert to Uppercase
           </button>
           <button
-            className='btn btn-primary mx-1 my-3'
+            disabled={text.length === 0}
+            className='btn btn-primary mx-1 my-1'
             onClick={handleLowClick}
           >
             Convert to Lowercase
           </button>
 
-          <button className='btn btn-primary mx-1 my-3' onClick={handlespeak}>
+          <button
+            disabled={text.length === 0}
+            className='btn btn-primary mx-1 my-1'
+            onClick={handlespeak}
+          >
             Speak
           </button>
 
           <button
-            className='btn btn-primary mx-1 my-3'
+            disabled={text.length === 0}
+            className='btn btn-primary mx-1 my-1'
             onClick={handleExteaSpaces}
           >
             Remove Extea Spaces
           </button>
 
           <button
-            className='btn btn-primary mx-1 my-3'
+            disabled={text.length === 0}
+            className='btn btn-primary mx-1 my-1'
             onClick={() =>
               handlesave(text, 'fileName.txt', 'data: text/json;charset=utf-8,')
             }
@@ -100,7 +111,11 @@ export default function TextForm(props) {
             Click to Save
           </button>
 
-          <button className='btn btn-primary mx-1 my-3' onClick={handlecopy}>
+          <button
+            disabled={text.length === 0}
+            className='btn btn-primary mx-1 my-1'
+            onClick={handlecopy}
+          >
             Copy text
           </button>
         </div>
@@ -114,15 +129,22 @@ export default function TextForm(props) {
       >
         <h2>Your Text Summary</h2>
         <p>
-          {text.split(' ').length}Words and {text.length}Characters
+          {
+            text.split(/\s/).filter((element) => {
+              return element.length !== 0;
+            }).length
+          }
+          -Words and {text.length}-Characters
         </p>
-        <p>{0.008 * text.split(' ').length}Minutes Read </p>
-        <h2>Preview</h2>
         <p>
-          {text.length > 0
-            ? text
-            : 'Enter sumthing in the texebox above the preview here '}
+          {0.008 *
+            text.split(' ').filter((element) => {
+              return element.length !== 0;
+            }).length}
+          Minutes Read{' '}
         </p>
+        <h2>Preview</h2>
+        <p>{text.length > 0 ? text : 'Nothing to Preview! '}</p>
       </div>
     </>
   );

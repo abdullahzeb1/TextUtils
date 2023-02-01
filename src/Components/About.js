@@ -1,29 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function About() {
-  const [myState, setMyState] = useState({
-    color: 'black',
-    backgroundColor: 'white',
-  });
-  const [btnText, setBtnText] = useState('Enable Dark Mode');
+export default function About(props) {
+  // const [myState, setMyState] = useState({
+  //   color: 'black',
+  //   backgroundColor: 'white',
+  // });
+  // const [btnText, setBtnText] = useState('Enable Dark Mode');
 
-  const handleOnChange = () => {
-    if (myState.color === 'black') {
-      setMyState({ color: 'white', backgroundColor: 'black' });
-      setBtnText('Enable light Mode');
-    } else {
-      setMyState({ color: 'black', backgroundColor: 'white' });
-      setBtnText('Enable Dark Mode');
-    }
+  // const handleOnChange = () => {
+  //   if (myState.color === 'black') {
+  //     setMyState({ color: 'white', backgroundColor: 'black' });
+  //     setBtnText('Enable light Mode');
+  //   } else {
+  //     setMyState({ color: 'black', backgroundColor: 'white' });
+  //     setBtnText('Enable Dark Mode');
+  //   }
+  // };
+
+  let myState = {
+    color: props.mode === 'dark' ? 'white' : '#042743',
+    backgroundColor: props.mode === 'dark' ? 'rgb(36 74 104)' : 'white',
   };
 
   return (
-    <div className='container my-3' style={myState}>
-      <h1 className='heading' style={myState}>
+    <div className='container '>
+      <h1
+        className='my-3'
+        style={{ color: props.mode === 'dark' ? 'white' : '#042743' }}
+      >
         About Us
       </h1>
       <div className='accordion' id='accordionExample'>
-        <div className='accordion-item' style={myState}>
+        <div className='accordion-item'>
           <h2 className='accordion-header' id='headingOne'>
             <button
               className='accordion-button'
@@ -43,7 +51,7 @@ export default function About() {
             aria-labelledby='headingOne'
             data-bs-parent='#accordionExample'
           >
-            <div className='accordion-body'>
+            <div className='accordion-body' style={myState}>
               <strong>This is the first item's accordion body.</strong> It is
               shown by default, until the collapse plugin adds the appropriate
               classes that we use to style each element. These classes control
@@ -55,7 +63,7 @@ export default function About() {
             </div>
           </div>
         </div>
-        <div className='accordion-item' style={myState}>
+        <div className='accordion-item'>
           <h2 className='accordion-header' id='headingTwo'>
             <button
               className='accordion-button collapsed'
@@ -75,7 +83,7 @@ export default function About() {
             aria-labelledby='headingTwo'
             data-bs-parent='#accordionExample'
           >
-            <div className='accordion-body'>
+            <div className='accordion-body' style={myState}>
               <strong>This is the second item's accordion body.</strong> It is
               hidden by default, until the collapse plugin adds the appropriate
               classes that we use to style each element. These classes control
@@ -87,7 +95,7 @@ export default function About() {
             </div>
           </div>
         </div>
-        <div className='accordion-item' style={myState}>
+        <div className='accordion-item'>
           <h2 className='accordion-header' id='headingThree'>
             <button
               className='accordion-button collapsed'
@@ -107,7 +115,7 @@ export default function About() {
             aria-labelledby='headingThree'
             data-bs-parent='#accordionExample'
           >
-            <div className='accordion-body'>
+            <div className='accordion-body' style={myState}>
               <strong>This is the third item's accordion body.</strong> It is
               hidden by default, until the collapse plugin adds the appropriate
               classes that we use to style each element. These classes control
@@ -120,7 +128,7 @@ export default function About() {
           </div>
         </div>
       </div>
-      <div className='contianer my-3'>
+      {/* <div className='contianer my-3'>
         <button
           onClick={handleOnChange}
           type='button'
@@ -128,7 +136,7 @@ export default function About() {
         >
           {btnText}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
